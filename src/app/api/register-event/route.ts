@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
         const registration = new Registration({
             eventId,
             name: existingUser.name || 'Unknown',
+            image: existingUser.image || 'https://via.placeholder.com/150',
             rollNo: existingUser.rollNo || 'N/A',
             branch: existingUser.branch || 'N/A',
             email: existingUser.email,
@@ -149,7 +150,7 @@ export async function GET(req: NextRequest) {
         if (!registration) {
             return NextResponse.json({ registered: false, user: existingUser });
         }
-        console.log(registration + "registration");
+        // console.log(registration + "registration");
         return NextResponse.json({ registered: true, user: existingUser, event: registration.eventId });
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
